@@ -7,7 +7,8 @@ class App
 	bool isRunning;
 
 	SDL_Window* window;
-	SDL_Surface* surfaceDisplay;
+	SDL_Renderer* renderer;
+	SDL_Texture* renderTexture;
 
 	static constexpr size_t windowWidth = 1280;
 	static constexpr size_t windowHeight = 720;
