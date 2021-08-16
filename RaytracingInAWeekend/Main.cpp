@@ -1,9 +1,6 @@
 #include "App.h"
 
-#include "SDL.h"
-#undef main
-
-int main()
+int main(int argc, char* args[])
 {	
 	App app;
 	
