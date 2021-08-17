@@ -1,6 +1,7 @@
 #include "App.h"
 
 #include <stdexcept>
+#include "ImageFactory.h"
 
 App::App()
 	: isRunning(true)
@@ -56,16 +57,6 @@ bool App::OnInit()
 		throw std::exception("Failed to initialise renderer.");
 		return false;
 	}
-
-	auto texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STREAMING, windowWidth, windowHeight);
-
-	if (texture == nullptr)
-	{
-		throw std::exception("Failed to initialise render texture.");
-		return false;
-	}
-	
-	image = std::make_unique<Image>(texture, windowWidth, windowHeight);
 	
 	SDL_RendererInfo rendererInfo;
 	if (SDL_GetRendererInfo(renderer, &rendererInfo) == 0)
@@ -81,7 +72,9 @@ bool App::OnInit()
 		throw std::exception("Unable to get render info.");
 		return false;
 	}
-
+	
+	image = imageFactory.MakeGradientImage(*this);
+	
 	return true;
 }
 
@@ -109,4 +102,16 @@ void App::OnRender()
 void App::OnCleanup()
 {
 	SDL_Quit();
+}
+
+SDL_Texture* App::MakeTexture(int width, int height)
+{
+	auto texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STREAMING, width, height);
+
+	if (texture == nullptr)
+	{
+		throw std::exception("Failed to initialise render texture.");
+	}
+
+	return texture;
 }

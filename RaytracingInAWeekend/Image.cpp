@@ -2,11 +2,13 @@
 
 #include <exception>
 
-Image::Image(SDL_Texture* texture, size_t width, size_t height)
-	: texture(texture)
-	, width(width)
+#include "App.h"
+
+Image::Image(App& app, size_t width, size_t height)
+	: width(width)
 	, height(height)
 {
+	texture = app.MakeTexture(width, height);
 }
 
 Image::~Image()
@@ -15,11 +17,11 @@ Image::~Image()
 	texture = nullptr;
 }
 
-void Image::SetPixelRGB(float x, float y, float r, float g, float b)
+void Image::SetPixelRGB(int x, int y, int r, int g, int b)
 {
 	SDL_Rect pixelRect;
-	pixelRect.x = static_cast<int>(x);
-	pixelRect.y = static_cast<int>(y);
+	pixelRect.x = x;
+	pixelRect.y = y;
 	pixelRect.h = 1;
 	pixelRect.w = 1;
 
