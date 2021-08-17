@@ -6,7 +6,6 @@ App::App()
 	: isRunning(true)
 	, window(nullptr)
 	, renderer(nullptr)
-	, renderTexture(nullptr)
 {
 }
 
@@ -58,14 +57,16 @@ bool App::OnInit()
 		return false;
 	}
 
-	renderTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STREAMING, windowWidth, windowHeight);
+	auto texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_STREAMING, windowWidth, windowHeight);
 
-	if (renderTexture == nullptr)
+	if (texture == nullptr)
 	{
 		throw std::exception("Failed to initialise render texture.");
 		return false;
 	}
-
+	
+	image = std::make_unique<Image>(texture, windowWidth, windowHeight);
+	
 	SDL_RendererInfo rendererInfo;
 	if (SDL_GetRendererInfo(renderer, &rendererInfo) == 0)
 	{
@@ -96,34 +97,12 @@ void App::OnEvent(SDL_Event* event)
 
 void App::OnLoop()
 {
-	// # Test writing to texture
-
-	//// unlock texture for speed
-
-	//SDL_UnlockTexture(renderTexture);
-
-	// set this pixel to be purple.
-	SDL_Rect rect;
-	rect.x = 10;
-	rect.y = 10;
-	rect.h = 1;
-	rect.w = 1;
-
-	uint32_t pixelColor = (255 << 16 | 0 << 8 | 255 << 0);
-	
-	if (SDL_UpdateTexture(renderTexture, &rect, &pixelColor, sizeof(pixelColor)) != 0)
-		throw std::exception("Error setting pixel!");
-
-	//// # lock texture for speed.
-	//void* texturePixels; // access to texture pixels.
-	//int texturePitch; // the current texture's pitch.
-	//SDL_LockTexture(renderTexture, NULL, &texturePixels, &texturePitch);
 }
 
 void App::OnRender()
 {
 	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, renderTexture, nullptr, nullptr);
+	SDL_RenderCopy(renderer, image->GetTexture(), nullptr, nullptr);
 	SDL_RenderPresent(renderer);
 }
 

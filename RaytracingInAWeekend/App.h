@@ -1,6 +1,8 @@
 #pragma once
 
+#include <memory>
 #include <SDL.h>
+#include "Image.h"
 
 class App
 {
@@ -8,7 +10,7 @@ class App
 
 	SDL_Window* window;
 	SDL_Renderer* renderer;
-	SDL_Texture* renderTexture;
+	std::unique_ptr<Image> image;
 
 	static constexpr size_t windowWidth = 1280;
 	static constexpr size_t windowHeight = 720;
