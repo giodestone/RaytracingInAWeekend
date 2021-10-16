@@ -1,5 +1,7 @@
 #include "ImageFactory.h"
 
+#include <iostream>
+
 #include "App.h"
 
 std::unique_ptr<Image> ImageFactory::MakeGradientImage(App& app)
@@ -8,6 +10,7 @@ std::unique_ptr<Image> ImageFactory::MakeGradientImage(App& app)
 
 	for (auto y = 0; y < img->GetHeight(); ++y)
 	{
+		//std::cout << "\rScanlines Rendering Gradient Image: " << static_cast<float>(y) / static_cast<float>(img->GetHeight()) * 100.f << "%" << std::flush;
 		for (auto x = 0; x < img->GetWidth(); ++x)
 		{
 			const auto r = static_cast<float>(x) / static_cast<float>(img->GetWidth() - 1);
@@ -20,7 +23,6 @@ std::unique_ptr<Image> ImageFactory::MakeGradientImage(App& app)
 			
 			img->SetPixelRGB(x, y, intR, intG, intB);
 		}
-	}
-
+	}	
 	return img;
 }
