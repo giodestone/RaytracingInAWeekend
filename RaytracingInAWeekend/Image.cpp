@@ -42,3 +42,8 @@ void Image::SetPixelRGB(int x, int y, int r, int g, int b)
 	//// unlock texture for speed
 	//SDL_UnlockTexture(renderTexture);
 }
+
+void Image::SetPixelRGB(int x, int y, Color c)
+{
+	SetPixelRGB(x, y, c.R(), c.G(), c.B());
+}

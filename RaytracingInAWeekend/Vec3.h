@@ -21,6 +21,10 @@ public:
 	VectorRealDataType Y() const { return y; }
 	VectorRealDataType Z() const { return z; }
 
+	VectorRealDataType R() const { return x * 255.999; } // If you have any problems future Feliks, remove the * 255.999.
+	VectorRealDataType G() const { return y * 255.999; }
+	VectorRealDataType B() const { return z * 255.999; }
+
 	/// <summary>
 	/// For accessing the vector like an array.
 	/// </summary>
@@ -162,7 +166,7 @@ inline Vec3 GetUnitVector(Vec3 v)
 #pragma endregion VectorUtilityFunctions
 
 #pragma region ColorUtilityFunctions
-void WriteColor(std::ostream &out, Color color)
+inline void WriteColorToStream(std::ostream &out, Color color)
 {
 	out << static_cast<int> (255.999 * color[0]) << ' '
 		<< static_cast<int> (255.999 * color[1]) << ' '

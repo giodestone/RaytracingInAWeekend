@@ -1,6 +1,6 @@
 #pragma once
 #include "SDL.h"
-
+#include "Vec3.h"
 class App;
 
 class Image
@@ -26,5 +26,7 @@ public:
 	/// <param name="g">Green 0-255</param>
 	/// <param name="b">Blue 0-255</param>
 	void SetPixelRGB(int x, int y, int r, int g, int b);
+
+	void SetPixelRGB(int x, int y, Color c);
 };
 
