@@ -30,6 +30,8 @@ public:
 
 	// Constants
 
+	static constexpr auto aspectRatio() { return static_cast<double>(windowHeight) / static_cast<double>(windowWidth); }
+	
 	static constexpr size_t windowWidth = 1280;
 	static constexpr size_t windowHeight = 720;
 

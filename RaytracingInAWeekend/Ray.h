@@ -13,9 +13,9 @@ public:
 		: origin(origin), direction(direction) {};
 	~Ray() = default;
 	
-	Vec3 Origin() { return origin; }
-	Vec3 Direction() { return direction; }
+	Vec3 Origin() const { return origin; }
+	Vec3 Direction() const { return direction; }
 
-	Vec3 At(double time) { return origin + (time * direction); }
+	Vec3 At(double time) const { return origin + (time * direction); }
 };
 
