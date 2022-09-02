@@ -20,6 +20,14 @@ int App::OnExecute()
 
 	SDL_Event event;
 
+	this->AddScenes();
+
+	// Init scenes.
+	for (auto& scene : scenes)
+	{
+		scene.OnInit();
+	}
+	
 	while (isRunning)
 	{
 		while (SDL_PollEvent(&event))
@@ -86,21 +94,41 @@ void App::OnEvent(SDL_Event* event)
 		isRunning = false;
 		break;
 	}
+
+	for (auto& scene : scenes)
+	{
+		scene.OnEvent(event);
+	}
 }
 
 void App::OnLoop()
 {
+	for (auto& scene: scenes)
+	{
+		scene.OnLoop();
+	}
 }
 
 void App::OnRender()
 {
 	SDL_RenderClear(renderer);
+
+	for (auto& scene : scenes)
+	{
+		scene.OnRender();
+	}
+	
 	SDL_RenderCopy(renderer, image->GetTexture(), nullptr, nullptr);
 	SDL_RenderPresent(renderer);
 }
 
 void App::OnCleanup()
 {
+	for (auto& scene : scenes)
+	{
+		scene.OnExit();
+	}
+	
 	SDL_Quit();
 }
 
@@ -114,4 +142,9 @@ SDL_Texture* App::MakeTexture(int width, int height)
 	}
 
 	return texture;
+}
+
+void App::AddScenes()
+{
+	// Put scenes to add to scene here.
 }

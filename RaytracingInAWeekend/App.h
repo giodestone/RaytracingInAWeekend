@@ -2,8 +2,11 @@
 
 #include <memory>
 #include <SDL.h>
+#include <vector>
+
 #include "Image.h"
 #include "ImageFactory.h"
+#include "Scene.h"
 
 class App
 {
@@ -14,6 +17,8 @@ class App
 	std::unique_ptr<Image> image;
 
 	ImageFactory imageFactory;
+
+	std::vector<Scene> scenes;
 
 public:
 	static constexpr size_t windowWidth = 1280;
@@ -34,7 +39,8 @@ public:
 
 	void OnCleanup();
 
-public:
+	
 	SDL_Texture* MakeTexture(int width = windowWidth, int height = windowHeight);
+	void AddScenes();
 };
 
