@@ -36,6 +36,9 @@
     <ClCompile Include="GradientImageScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RayScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GradientImageScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RayScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

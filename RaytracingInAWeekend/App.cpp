@@ -5,6 +5,7 @@
 
 #include "GradientImageScene.h"
 #include "ImageFactory.h"
+#include "RayScene.h"
 
 App::App()
 	: isRunning(true)
@@ -148,5 +149,6 @@ SDL_Texture* App::MakeTexture(int width, int height)
 void App::AddScenes()
 {
 	// Put scenes to add to scene here.
-	scenes.emplace_back( std::make_unique<GradientImageScene>(std::ref(*this)) );
+	scenes.emplace_back(std::make_unique<GradientImageScene>(std::ref(*this)));
+	scenes.emplace_back(std::make_unique<RayScene>(std::ref(*this)));
 }
