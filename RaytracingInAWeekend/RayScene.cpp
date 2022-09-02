@@ -23,7 +23,7 @@ void RayScene::OnLoop()
 
 void RayScene::OnRender()
 {
-	for (auto j = imageHeight - 1; j >= 0; j--)
+	for (auto j = 0; j < imageHeight; j++)
 	{
 		for (auto i = 0; i < imageWidth; i++)
 		{
