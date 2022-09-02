@@ -1,5 +1,9 @@
 #include "Scene.h"
 
+#include <iostream>
+#include <ostream>
+
+
 void Scene::OnInit()
 {
 }

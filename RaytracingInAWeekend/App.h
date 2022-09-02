@@ -4,9 +4,7 @@
 #include <SDL.h>
 #include <vector>
 
-#include "Image.h"
-#include "ImageFactory.h"
-#include "Scene.h"
+class Scene;
 
 class App
 {
@@ -14,19 +12,30 @@ class App
 
 	SDL_Window* window;
 	SDL_Renderer* renderer;
-	std::unique_ptr<Image> image;
 
-	ImageFactory imageFactory;
+	std::vector<std::unique_ptr<Scene>> scenes;
 
-	std::vector<Scene> scenes;
+public:	
+	// Constructors
+	
+	App();
+	~App() = default;
 
-public:
+
+	// Properties
+	
+	SDL_Renderer* Renderer() { return renderer; }
+	SDL_Window* Window() { return window; }
+	bool IsRunning() { return isRunning; }
+
+	// Constants
+
 	static constexpr size_t windowWidth = 1280;
 	static constexpr size_t windowHeight = 720;
-	
-public:
-	App();
 
+	
+	// Application loop functions
+	
 	int OnExecute();
 
 	bool OnInit();
@@ -39,8 +48,12 @@ public:
 
 	void OnCleanup();
 
+
+	// SDL related functions
 	
 	SDL_Texture* MakeTexture(int width = windowWidth, int height = windowHeight);
+
+private:
 	void AddScenes();
 };
 

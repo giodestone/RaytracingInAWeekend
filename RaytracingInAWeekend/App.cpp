@@ -1,6 +1,9 @@
 #include "App.h"
+#include "Scene.h"
 
 #include <stdexcept>
+
+#include "GradientImageScene.h"
 #include "ImageFactory.h"
 
 App::App()
@@ -25,7 +28,7 @@ int App::OnExecute()
 	// Init scenes.
 	for (auto& scene : scenes)
 	{
-		scene.OnInit();
+		scene->OnInit();
 	}
 	
 	while (isRunning)
@@ -81,8 +84,6 @@ bool App::OnInit()
 		return false;
 	}
 	
-	image = imageFactory.MakeGradientImage(*this);
-	
 	return true;
 }
 
@@ -97,7 +98,7 @@ void App::OnEvent(SDL_Event* event)
 
 	for (auto& scene : scenes)
 	{
-		scene.OnEvent(event);
+		scene->OnEvent(event);
 	}
 }
 
@@ -105,7 +106,7 @@ void App::OnLoop()
 {
 	for (auto& scene: scenes)
 	{
-		scene.OnLoop();
+		scene->OnLoop();
 	}
 }
 
@@ -115,10 +116,10 @@ void App::OnRender()
 
 	for (auto& scene : scenes)
 	{
-		scene.OnRender();
+		scene->OnRender();
 	}
 	
-	SDL_RenderCopy(renderer, image->GetTexture(), nullptr, nullptr);
+	//SDL_RenderCopy(renderer, image->GetTexture(), nullptr, nullptr);
 	SDL_RenderPresent(renderer);
 }
 
@@ -126,7 +127,7 @@ void App::OnCleanup()
 {
 	for (auto& scene : scenes)
 	{
-		scene.OnExit();
+		scene->OnExit();
 	}
 	
 	SDL_Quit();
@@ -147,4 +148,5 @@ SDL_Texture* App::MakeTexture(int width, int height)
 void App::AddScenes()
 {
 	// Put scenes to add to scene here.
+	scenes.emplace_back( std::make_unique<GradientImageScene>(std::ref(*this)) );
 }

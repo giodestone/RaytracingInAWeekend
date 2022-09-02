@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="GradientImageScene.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageFactory.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -158,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="GradientImageScene.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageFactory.h" />
     <ClInclude Include="Ray.h" />

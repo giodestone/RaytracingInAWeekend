@@ -1,17 +1,19 @@
 #pragma once
 
-#include <SDL.h>
+#include "App.h"
 
 /// <summary>
-/// Base class for a rendering scene. For all logic to do with rendering it.
+/// Base class for a scene. Should be extended.
 /// </summary>
 class Scene
 {
 private:
-	class App* app;
+	std::reference_wrapper<App> app;
+protected:
+	std::reference_wrapper<App> GetApp() { return app; }
 public:
-	Scene(App* app)
-		: app(app)	{}
+	Scene(std::reference_wrapper<App> app)
+		: app(app) {}
 	~Scene() = default;
 
 	virtual void OnInit();

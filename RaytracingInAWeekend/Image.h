@@ -1,6 +1,7 @@
 #pragma once
 #include "SDL.h"
 #include "Vec3.h"
+
 class App;
 
 class Image
