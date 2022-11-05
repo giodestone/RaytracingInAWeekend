@@ -21,7 +21,7 @@ public:
 	VectorRealDataType Y() const { return y; }
 	VectorRealDataType Z() const { return z; }
 
-	VectorRealDataType R() const { return x * 255.999; } // If you have any problems future Feliks, remove the * 255.999.
+	VectorRealDataType R() const { return x * 255.999; } // If you have any problems future, remove the * 255.999.
 	VectorRealDataType G() const { return y * 255.999; }
 	VectorRealDataType B() const { return z * 255.999; }
 
